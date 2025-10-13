@@ -8,6 +8,10 @@ class TestStockReserveSale(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        group_user = cls.env.ref("base.group_user")
+        group_user.implied_ids += cls.env.ref(
+            "stock.group_stock_multi_warehouses"
+        ) | cls.env.ref("stock.group_stock_multi_locations")
         partner_form = Form(cls.env["res.partner"])
         partner_form.name = "Test partner"
         partner_form.country_id = cls.env.ref("base.es")
